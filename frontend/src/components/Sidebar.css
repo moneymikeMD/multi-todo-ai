@@ -1,0 +1,222 @@
+.sidebar {
+  width: 300px;
+  background: rgba(31, 41, 55, 0.95);
+  border-right: 2px solid #E63946;
+  height: 100vh;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #E63946 0%, #1E3A8A 50%, #D4AF37 100%);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 20px 20px;
+  border-bottom: 2px solid rgba(230, 57, 70, 0.3);
+  position: relative;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.add-list-btn {
+  background: linear-gradient(135deg, #E63946 0%, #DC2626 100%);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-list-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+}
+
+.loading {
+  text-align: center;
+  color: #9CA3AF;
+  padding: 40px 20px;
+  font-weight: 500;
+}
+
+.error-message {
+  background: linear-gradient(135deg, #E63946 0%, #DC2626 100%);
+  color: white;
+  padding: 15px 20px;
+  margin: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+}
+
+.lists-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.no-lists {
+  text-align: center;
+  color: #9CA3AF;
+  padding: 40px 20px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.no-lists p {
+  margin: 5px 0;
+}
+
+.list-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.list-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #1E3A8A 0%, #E63946 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.list-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+  border-color: rgba(230, 57, 70, 0.3);
+}
+
+.list-item:hover::before {
+  opacity: 1;
+}
+
+.list-item.selected {
+  background: rgba(30, 58, 138, 0.2);
+  border-color: #1E3A8A;
+  transform: translateX(5px);
+}
+
+.list-item.selected::before {
+  opacity: 1;
+  background: linear-gradient(180deg, #E63946 0%, #1E3A8A 100%);
+}
+
+.list-content {
+  flex: 1;
+  pointer-events: none;
+}
+
+.list-name {
+  margin: 0 0 8px 0;
+  color: #FFFFFF;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.list-description {
+  margin: 0;
+  color: #9CA3AF;
+  font-size: 13px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.list-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.list-item:hover .list-actions,
+.list-item.selected .list-actions {
+  opacity: 1;
+}
+
+.edit-list-btn,
+.delete-list-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.edit-list-btn:hover {
+  background: rgba(212, 175, 55, 0.2);
+  transform: scale(1.1);
+}
+
+.delete-list-btn:hover {
+  background: rgba(230, 57, 70, 0.2);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 2px solid #E63946;
+  }
+  
+  .sidebar-header {
+    padding: 20px;
+  }
+  
+  .lists-container {
+    padding: 15px;
+  }
+} 
