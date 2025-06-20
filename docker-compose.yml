@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/tododb
+      - SPRING_DATASOURCE_USERNAME=todo
+      - SPRING_DATASOURCE_PASSWORD=todo
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - db
+    networks:
+      - todo-net
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - todo-net
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: tododb
+      POSTGRES_USER: todo
+      POSTGRES_PASSWORD: todo
+    ports:
+      - "5432:5432"
+    volumes:
+      - todo-db-data:/var/lib/postgresql/data
+    networks:
+      - todo-net
+networks:
+  todo-net:
+    driver: bridge
+volumes:
+  todo-db-data: 
